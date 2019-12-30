@@ -1,0 +1,12 @@
+{
+    "plugins": [
+      // Pluguin asyn
+    ],
+    "presets": [
+      // "env",
+      // Soporte de Javascript ES2015  (ES6)
+      "@babel/preset-env"
+    ]
+  }
+
+
