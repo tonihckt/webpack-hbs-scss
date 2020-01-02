@@ -1,0 +1,22 @@
+<!--定义模板 -->
+    <script type="text/template" id="product-list-template">
+        {{#each result}} 
+        <li>
+            <a href="#">
+                <div class="product-img">
+                    {{{productImg}}}
+                </div>
+                <div class="product-text">
+                    <h5>
+                        {{productName}}
+                    </h5>
+                    <p>{{productPrice}}</p>
+                </div>
+                <div class="other">
+                    <span>{{productQuote}}</span>
+                    <span>{{productCom}}</span>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+</script>

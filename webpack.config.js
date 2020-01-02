@@ -8,11 +8,29 @@ const autoprefixer = require('autoprefixer');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const HbsWebpackPlugin = require("handlebars-webpack-plugin");
+// const compiledTemplate = require("./template.handlebars");
 
 // 'production' - 'development'
 const MODE = 'development';
 const enabledSourceMap = (MODE === 'development');
 const isDevelopment = process.env.NODE_ENV === 'development';
+
+
+// const pages = require('./src/views/pages');
+// let renderedPages = [];
+// for (let i = 0; i < pages.length; i++) {
+//   let page = Object.assign({}, pages[i]);
+//   renderedPages.push(
+//     new HtmlWebpackPlugin({
+//       template: page.template,
+//       filename: page.output,
+//       title: page.content.title,
+//       description: page.content.description
+//     })
+//   );
+// }
+
 
 module.exports = {
   mode: isDevelopment,
@@ -20,8 +38,8 @@ module.exports = {
     app: path.resolve(__dirname,'./src/app.js'),
   }, 
   output: {
-    path: path.resolve (__dirname, 'dist') ,
-    filename: 'scripts/bundle.js',
+    path: path.resolve (__dirname, 'build') ,
+    filename: 'assets/scripts/bundle.js',
     // filename: 'scripts/[name].js',
     // chunkFilename: 'scripts/[id].[chunkhash].js'
   },
@@ -57,6 +75,7 @@ module.exports = {
       {
         test: /\.jsx|js$/,
         exclude: /(node_modules|bower_components)/,
+        // exclude: path.resolve(__dirname, "node_modules"), 
         use: [
           { 
             loader: 'babel-loader',
@@ -75,9 +94,6 @@ module.exports = {
         use: [
           { 
             loader: 'handlebars-loader',
-            options: {
-              // helperDirs: path.resolve(__dirname, "./js/helpers"),
-            }
           },         
         ],
         // include: path.join(__dirname, 'src')
@@ -108,11 +124,14 @@ module.exports = {
             // Loader for webpack to process CSS with PostCSS
             loader: 'postcss-loader',
             options: {
+              ident: 'postcss',
               autoprefixer: {
                 browsers: ['last 2 versions', 'Android >= 4'],
               },
               plugins: () => [
-                  autoprefixer,
+                  // autoprefixer,
+                  require('tailwindcss'),
+                  require('autoprefixer'),
               ]
             }
           },          
@@ -132,14 +151,13 @@ module.exports = {
         test: /\.(woff|woff2|ttf|eot|otf|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
         // test: /\.(woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
         // test: /\.(woff(2)?|ttf|eot|otf|svg)([\?]?.*)$/,
-        // exclude: path.resolve(__dirname, "node_modules"), 
         use: [
           {
             loader: 'file-loader',
             options: {
               // name: '[name]-[hash].[ext]',
               name: '[name].[ext]', 
-              outputPath: 'fonts/',
+              outputPath: 'assets/fonts/',
               prefix: "font", 
               limit: 10000, 
             }
@@ -150,12 +168,24 @@ module.exports = {
       // -------------- IMAGES: url-loader -------------------
       // -----------------------------------------------------
       {
-        test: /\.(gif|png|jpe?g|svg|jpg|png|gif|mp4|webm)$/,
+        test: /\.(gif|png|jpe?g|svg|jpg|png|bmp|svgz)$/,
         loader: 'file-loader', 
         options: {
-          outputPath: 'images/',
+          outputPath: 'assets/images/',
           name: '[name]-[hash].[ext]',
-          limit: 90000,
+          // limit: 90000,
+          limit: 10 * 1024,
+        },
+        // include: path.join(__dirname, 'src'),
+      },
+      // -------------- Videos: url-loader -------------------
+      // -----------------------------------------------------
+      {
+        test: /\.(webm|mp4)$/,
+        loader: 'file-loader', 
+        options: {
+          outputPath: 'assets/videos/',
+          name: '[name]-[hash].[ext]',
         },
         // include: path.join(__dirname, 'src'),
       },
@@ -168,14 +198,14 @@ module.exports = {
     // // Extraer css
     new MiniCssExtractPlugin({ 
       path: path.resolve(__dirname, 'build'),
-      filename: 'styles/main.css',
+      filename: 'assets/styles/main.css',
       // filename: "[name] -styles.css",
       // chunkFilename: 'styles/[id].css'
     }),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'src/images/'),
-        to: path.resolve(__dirname, 'build/images/'),
+        from: path.resolve(__dirname, 'src/assets/images/'),
+        to: path.resolve(__dirname, 'build/assets/images/'),
       },
     ]),
     new ImageminPlugin({
@@ -185,34 +215,65 @@ module.exports = {
       },
     }),
     // new CleanWebpackPlugin(['build']),
-    // new webpack.LoaderOptionsPlugin ({ 
-    //   opciones: { 
-    //     handlebarsLoader: {} 
-    //   } 
-    // }),
+    new webpack.LoaderOptionsPlugin ({ 
+      opciones: { 
+        handlebarsLoader: {} 
+      } 
+    }),
     // Generar html 
+    // new HtmlWebpackPlugin({ // Generates default index.html
+    //   title: 'Index template',
+    //   template: './src/index.hbs',
+    //   filename: "index.html",
+    //   inject: true,
+    //   minify: {
+    //       removeComments: true,
+    //       collapseWhitespace: false
+    //   }
+    // }),
+    // new HtmlWebpackPlugin({ // Also generate a test.html
+    //   title: 'Home template',
+    //   template: path.resolve(__dirname, 'src/home.hbs'),
+    //   filename: "home.html",
+    //   inject: true,
+    //   minify: {
+    //     removeComments: true,
+    //     collapseWhitespace: false,
+    //   },
+    // }),
     new HtmlWebpackPlugin({ // Generates default index.html
-      title: 'Index template',
       template: './src/index.hbs',
       filename: "index.html",
+      title: 'Index template',
+      description: 'Home Page',
       inject: true,
       minify: {
-          removeComments: true,
-          collapseWhitespace: false
-      }
-    }),
-    new HtmlWebpackPlugin({ // Also generate a test.html
-      title: 'Home template',
-      template: path.resolve(__dirname, 'src/home.hbs'),
-      filename: "home.html",
-      inject: true,
-      minify: {
+        html5: true,
         removeComments: true,
         collapseWhitespace: false,
-      },
+        removeEmptyElements: false
+      }
     }),
+    // // Generar hbs
+    // new HbsWebpackPlugin({
+    //   htmlWebpackPlugin: {
+    //   enabled: true, // register all partials from html-webpack-plugin, defaults to `false`
+    //   prefix: "html" // where to look for htmlWebpackPlugin output. default is "html"
+    //   },
+    //   entry: path.join(process.cwd(), "src", "*.hbs"),
+    //   output: path.join(process.cwd(), "build", "[name].html"),
+    //   partials: [
+    //     path.join(process.cwd(), "html",/* <-- this should match htmlWebpackPlugin.prefix */ "*", "*.hbs"),
+    //     path.join(process.cwd(), "src", "*", "*.hbs")
+    //   ]
+    // }),
     new webpack.HotModuleReplacementPlugin(), // solo cargar se quiere recargar
     // new webpack.NoErrorsPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Popper: 'popper.js'
+    }),
   ],
   optimization: {
     minimizer: [
@@ -225,7 +286,10 @@ module.exports = {
       }),
     ],
   },
-  // resolve: {
-  //   extensions: ['*', '.js', '.jsx','.scss']
-  // },
+  resolve: {
+    // extensions: ['*', '.js', '.jsx','.scss'],
+    alias: {
+      "handlebars": path.resolve( __dirname ) + "/node_modules/handlebars/dist/handlebars",
+    },
+  },
 }

@@ -1,0 +1,81 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/x-handlebars-template" id="helper-template">
+
+    {{!-- WIDTH --}}
+    {{!-- accede a los datos de contextObj --}}
+    {{!-- {{#width autor}}
+        <h2>{{name}}, {{lastName}}</h2>
+    {{/width }} --}}
+
+    {{!-- ELSE --}}
+    {{!-- devuelve un true o false --}}
+    {{!-- {{#if novelWriter}}
+        <h2>{{autor.name}}</h2>
+    {{else}}
+        <h2>Not a writer</h2>
+    {{/if}} --}}
+
+    {{!-- ELSE --}}
+    {{!-- es lo opuesto alse (a menos que) --}}
+    {{!-- {{#unless novelWriter}}
+        <h2>{{autor.name}}</h2>
+    {{else}}
+        <h2>Is a writer</h2>
+    {{/unless}} --}}
+
+
+    {{!-- BUCLE FOR EACH --}}
+    {{!-- para iterar --}}
+    {{#each comments}}
+        <div>{{autor}}: <em>{{message}}</em></div>
+    {{/each}}
+
+</script>
+
+<!-- agregamos la siguiente etiqueta -->
+<div id="helper"></div>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/javascript">
+    //var Handlebars = require("./file.handlebars")
+    //var Handlebars = require("handlebars/handlebars.runtime");
+    // obtenemos el contenido
+    //const Handlebars = require("./template.handlebars");
+    // obtenemos el contenido
+    let containerTemplate = document.getElementById('helper-template').innerHTML;
+    console.log(containerTemplate);
+    // ejecutar la plantilla
+    let runTemplate = Handlebars.compile(containerTemplate);
+
+    let contextObjectData = {
+        novelWriter = true,
+        autor: {
+            name = 'Jose',
+            lastName = 'Jose Last'
+        }.
+        comments: [
+            {
+                autor: 'Pepe',
+                message = 'Hola-hola',
+            },
+            {
+                autor: 'Lolo',
+                message = 'Manolo',
+            },
+        ]
+    };
+
+    let htmlResult = theTemplate(contextObjectData);
+    document.getElementById('helper').innerHTML = htmlResult ;
+</script>

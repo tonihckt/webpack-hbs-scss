@@ -1,0 +1,51 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/x-handlebars-template" id="helper-link-to">
+    {{!-- CREATE UN HELPER --}}
+    {{!-- tiene dos parametro (ruta y texto del enlace --}}
+    {{link_to "contacto" "Pagina de contacto"}},
+    {{link_to "usuario/23/toni_nito" "Pagina de usuario"}}
+</script>
+
+
+<!-- agregamos la siguiente etiqueta -->
+<div id="link-to"></div>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/javascript">
+    //var Handlebars = require("./file.handlebars")
+    //var Handlebars = require("handlebars/handlebars.runtime");
+    // obtenemos el contenido
+    //const Handlebars = require("./template.handlebars");
+    // obtenemos el contenido
+    let containerTemplate = document.getElementById('helper-link-to').innerHTML;
+    console.log(containerTemplate);
+    // ejecutar la plantilla
+    let runTemplate = Handlebars.compile(containerTemplate);
+
+    let contextObjectData = {
+    };
+
+    // genera un nuevo helper
+    Handlebars.registerHelper(link_to, function(url, name){
+        var url = Handlebars.Utils.escapeExpression(url);
+        var name = Handlebars.Utils.escapeExpression(name);
+        // generar el enlace
+        var link = "<a href=\""+ location.protocol + "//" + location.host + "/" + url + "\">" + name + "</a>";
+        // pasa como html 
+        return new Handlebars.safeString(link);
+    });
+
+    let htmlResult = theTemplate(contextObjectData);
+    document.getElementById('link-to').innerHTML = htmlResult ;
+</script>

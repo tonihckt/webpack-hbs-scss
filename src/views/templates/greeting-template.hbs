@@ -1,0 +1,38 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-greeting.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+{{!-- <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.runtime.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script> --}}
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/x-handlebars-template" id="greeting-template">
+    <div>
+        My name is {{name}}. And live is {{city}}.
+    </div>
+</script>
+
+
+<!-- agregamos la siguiente etiqueta -->
+<div id="greeting"></div>
+
+
+<!-- Creamos la logica de la plantilla en handlebar. -->
+<script type="text/javascript">
+    //var Handlebars = require("./file.handlebars")
+    //var Handlebars = require("handlebars/handlebars.runtime");
+    // obtenemos el contenido
+    //const Handlebars = require("./template.handlebars");
+    var theScriptHTML = document.getElementById('greeting-template').innerHTML;
+    console.log(theScriptHTML);
+    // ejecutar la plantilla
+    var theTemplate = Handlebars.compile(theScriptHTML);
+    var contextObj = compile({name:"Toni", city:"BCN"});
+    var compileData = theTemplate(contextObj);
+    document.getElementById('greeting').innerHTML = compileData ;
+</script>
+

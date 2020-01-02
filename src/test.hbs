@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{htmlWebpackPlugin.options.title}}</title>
+    <!-- <link rel="stylesheet" href="styles/main.css"> -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="bower_components/materialize/bin/materialize.css" media="screen,projection" />
+    {{!-- <link type="text/css" rel="stylesheet" href="style.css" /> --}}
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  </head>
+  <body>
+<body>
+  <script type="text/x-handlebars-template" id="main-template">
+    <h1>Loaded main template</h1>  
+  </script>
+    <button class="clear-screen">Click Me</button>
+  <nav>
+    <div class="nav-wrapper" id="nav-color">
+      <a href="#!" class="brand-logo">Logo</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      <ul class="side-nav" id="mobile-demo">
+          <li><a href="#!"><i class="mdi-action-home left"></i>Home</a></li>
+        <li><a href="#"><i class="mdi-content-add left"></i>Add Card</a></li>
+          <li><a href="#"><i class="mdi-navigation-close left"></i>Remove Card</a></li>
+        <li><a href="#"><i class="mdi-action-stars left"></i>Get Premium</a></li>
+          <li><a href="#"><i class="mdi-action-settings left"></i>Settings</a></li>
+      </ul>
+    </div>
+  </nav>
+     <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header" id="flybuys"><span id="flybuys-text">FlyBuys</span></div>
+      <div class="collapsible-body"><img id="barcode" src="http://www.barcodes.co.nz/wp-content/uploads/39123439-code39.gif" /></div>
+    </li>
+    <li>
+      <div class="collapsible-header" id="airpoints"><span id="airpoints-text">Airpoints</span></div>
+      <div class="collapsible-body"><img id="barcode" src="http://www.barcodes.co.nz/wp-content/uploads/39123439-code39.gif" /></div>
+    </li>
+    <li>
+      <div class="collapsible-header" id="onecard"><span id="airpoints-text">OneCard</span></div>
+      <div class="collapsible-body"><img id="barcode" src="http://www.barcodes.co.nz/wp-content/uploads/39123439-code39.gif" /></div>
+    </li>
+         <li>
+      <div class="collapsible-header" id="summitclub"><span id="summit-text">Kathmandu Summit Club</span></div>
+      <div class="collapsible-body"><img id="barcode" src="http://www.barcodes.co.nz/wp-content/uploads/39123439-code39.gif" /></div>
+    </li>
+         <li>
+      <div class="collapsible-header" id="clubcard"><span id="new-world-text">New World ClubCard</span></div>
+      <div class="collapsible-body"><img id="barcode" src="http://www.barcodes.co.nz/wp-content/uploads/39123439-code39.gif" /></div>
+    </li>
+  </ul>
+
+<!-- Modal Trigger -->
+  <a id="btn-color" class="waves-effect waves-light btn modal-trigger" href="#modal1">Add More</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Get Premium</h4>
+      <p>To have more than 5 card you need Premium, this gives you the ability to have unlimited card! Get it now for only $1.</p>
+    </div>
+   <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">Not now</a>
+            <a href="https://play.google.com/store" class="modal-action modal-close waves-effect waves-green btn-flat ">Get Premium </a>
+          </div>
+  </div>
+
+    <div class="content">
+        init content
+    </div>
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="bower_components/handlebars/handlebars.min.js"></script>
+    <script type="text/javascript" src="bower_components/materialize/bin/materialize.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+     <script type="text/javascript">
+        var template = handlebars.compile( $('#main-template').html() );
+        $(document).on('click','.clear-screen', function(){
+            $('.content').html( template() );
+        });
+    </script>
+
+  </body>
+</html>

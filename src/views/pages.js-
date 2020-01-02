@@ -1,0 +1,19 @@
+const pages = [
+  {    
+    template: './views/pages/home.hbs',
+    output: './index.html',
+    content: {
+    inject: true,
+    title: 'Index template',
+    // description: 'Home Page',
+    minify: {
+        html5: true,
+        removeComments: true,
+        collapseWhitespace: false,
+        removeEmptyElements: false
+      }
+    },
+  },
+]
+
+module.exports = pages

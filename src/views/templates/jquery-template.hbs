@@ -1,0 +1,25 @@
+<!-- Hacemos refrencia al archivo handlebars -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script id="mi-plantilla" type="text/x-handlebars-template">
+    <p>¡Hola {{nombre}}!</p>
+    <!-- esta accidendo a esos datos a la pocisión 0 como si fuera un array y esta buscando ese campo nombre -->
+    <p>¡Hola {{this.[0].nombre}}!</p>
+</script>
+
+<!-- Luego agregamos la siguiente etiqueta -->
+<div id="contenedor"></div>
+
+<script>
+    $(document).ready(function() {
+        var origen = $('#mi-plantilla').html();
+        var plantilla = Handlebars.compile(origen);
+
+        var persona_A = { nombre: 'Carlos', edad: 20};
+        var persona_B = { nombre: 'Alicia', edad: 22};
+        var alumnos = [persona_A, persona_B];
+
+        $('#contenedor').html( plantilla(alumnos) );
+    })
+</script>

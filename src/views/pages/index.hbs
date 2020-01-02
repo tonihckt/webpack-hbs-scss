@@ -1,18 +1,15 @@
 {{#> base }}
 
-  {{> views/partials/head title=htmlWebpackPlugin.options.title}} 
+  {{> partials/header title=htmlWebpackPlugin.options.title}} 
 
   <main role="main" class="container">
-    <button id="btn-alert" style="display: none;">Alert</button>
-    <div class="wrapper">
-      {{> views/partials/nav}}
-    </div>
+    
     {{#> welcome title="Home Page" }}
       <p class="lead"><i class="fas fa-rocket"></i> Use this <a href="/about">document</a> as a way to quickly start any new project.</p>
     {{/welcome}}
 
-    {{> views/partials/newsletter}}
-    {{> views/partials/social}}
+    {{!-- {{> partials/newsletter}} --}}
+    {{!-- {{> partials/social}} --}}
   </main>
 
 {{/ base }}

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{htmlWebpackPlugin.options.title}}</title>
     <!-- <link rel="stylesheet" href="styles/main.css"> -->
@@ -12,39 +13,49 @@
     <![endif]-->
   </head>
   <body>
+  
+  <div id="app"></div>
+
+  {{#> welcome title="Home Page" }}
+    <p class="lead"><i class="fas fa-rocket"></i> Use this <a href="/about">document</a> as a way to quickly start any new project.</p>
+  {{/welcome}}
 
     <button id="btn-alert">hola</button>
-    <h1>sssd</h1>
-    <p>s</p>
     <button id="btn-jquery">Click ssssfffjQuery</button>
-    <h1>jsjsssssssssssssdddddj</h1>
-    <p>s</p>
-      <h1 class="display-1">Hello World</h1>
-<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>
-<div class="alert alert-secondary" role="alert">
-  A simple secondary alert—check it out!
-</div>
-<div class="alert alert-success" role="alert">
-  A simple success alert—check it out!
-</div>
-
-    <h1>Webpack, Sass & A Template Engine</h1>
-    <!-- <img src="./static/logo.png" alt=""> -->
-
     <div class="wrapper">
         <div class="content">
             {{>views/partials/header title=htmlWebpackPlugin.options.title}} 
             {{>views/partials/newsletter}}
             {{>views/partials/social}}
+
         </div>
         <div class="visual">
         </div>
     </div>
-   <h1>kk</h1>
    <i class="fa fa-check fa-lg"></i>
     <i class="fab fa-twitter-square"></i>
-   <!-- <script type="text/javascript" src="scripts/bundle.js"></script> -->
+
+    {{!-- <div id="app">
+      <div class="box-big"></div>
+    </div> --}}
+
+    {{!-- <div id="routers">
+      <p>Go to <a href="/about" data-path>About page</a></p>
+    </div> --}}
+
+  <div class="bg-white rounded-lg p-6">
+    <img class="h-16 w-16 rounded-full mx-au" src="./assets/images/skull.png">
+    <div>
+      <h2>Erin Lindford</h2>
+      <div>Customer Support</div>
+      <div>erinlindford@example.com</div>
+      <div>(555) 765-4321</div>
+    </div>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+  Button
+</button>
+  </div>
+  
+
   </body>
 </html>

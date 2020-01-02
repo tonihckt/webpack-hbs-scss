@@ -1,0 +1,34 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/x-handlebars-template" id="test-template">
+    <div>
+        My name is {{{name}}}.
+    </div>
+</script>
+
+
+<!-- agregamos la siguiente etiqueta -->
+<div id="test"></div>
+
+
+<!-- Creamos la plantilla en handlebar de la siguiente manera. -->
+<script type="text/javascript">
+    //const Handlebars = require("./file.handlebars")
+    // obtenemos el contenido
+    let containerTemplate = document.querySelector('#test-template').innerHTML;
+    console.log(containerTemplate);
+    // ejecutar la plantilla
+    let runTemplate = Handlebars.compile(containerTemplate);
+    let contextObjectData = compile({name:'<em>Toni</em>'});
+    let htmlResult = theTemplate(contextObjectData);
+    document.getElementById('test').innerHTML = htmlResult ;
+</script>
