@@ -34,6 +34,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
   mode: isDevelopment,
+  // target: 'node',
   entry: {
     app: path.resolve(__dirname,'./src/app.js'),
   }, 
@@ -94,6 +95,18 @@ module.exports = {
         use: [
           { 
             loader: 'handlebars-loader',
+            options: {
+              // knownHelpersOnly: false,
+              // partialDirs: [path.join(PATHS.TEMPLATES, 'partials')],
+              // inlineRequires: /\/assets\/(:?images|audios|videos)\//ig,
+              // inlineRequires: /photo/,
+              helperDirs: [path.join(__dirname, './src/views/helpers')],
+              partialDirs: [path.join(__dirname, './src/views/partials')],
+              helperDirs: [__dirname + "/../handlebars/helpers"],
+              // includePaths: [
+              //   path.resolve("./node_modules/handlebars/dist/handlebars")
+              // ],
+            }
           },         
         ],
         // include: path.join(__dirname, 'src')
@@ -192,6 +205,7 @@ module.exports = {
     ],
   },
   watch: true,
+  // externals: [ nodeExternals() ],
   plugins:[
     // ver el módulo con nombre en lugar de la identificación en consola
     new webpack.NamedModulesPlugin(),

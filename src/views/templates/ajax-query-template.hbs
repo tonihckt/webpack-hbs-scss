@@ -1,0 +1,81 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<div class="container">
+    <div id="quotes">   <!-- etiqueta handlebar -->
+    <!-- plantilla en handlebar -->
+    <script type="text/x-handlebars-template" id="quotes-template">
+        <div class="row">
+            {{#each quotes}}
+            <div class="col-12 col-sm-6 p-3">
+            <div class="card">
+                <h4 class="card-header">
+                    {{title}}
+                </h4>
+                <div class="card-body">
+                    {{{content}}}
+                </div>
+            </div>
+            </div>
+            {{/each}}
+        </div>
+    </script>   <!-- end plantilla en handlebar -->
+    </div>  <!-- etiqueta handlebar -->
+</div>
+
+
+
+<!-- logica de plantilla -->
+{{!-- <script type="text/javascript">
+$(document).ready( function(){
+
+    // guarda en contenido ajax
+    let contextObjectData = document.getElementById('quotes');
+    // ajax
+    let ajaxUrl = ".../helpers/data/data.json";
+    let saveAjaxData = {ajax: []};
+
+    // Running ajax
+    let dataQuery = $.ajax({
+        method: 'GET',
+        url: ajaxUrl
+    })
+
+    dataQuery.done( (res) => {
+        for(var i = 0; i < res.length; i ++){
+        saveAjaxData.quotes.push(res[i])
+        }  
+
+        // obtenemos el contenido
+        let containerTemplate = document.querySelector('#quotes-template').innerHTML;
+        // ejecutar la plantilla
+        let runTemplate = Handlebars.compile(containerTemplate);
+        let htmlResult = runTemplate(contextObjectData);
+
+        content.innerHTML = htmlResult;
+    })
+})
+
+</script> --}}
+
+
+
+<script type="text/javascript">
+
+$(document).ready( function(){
+// obtenemos el contenido
+let containerTemplate = document.querySelector('#quotes-template').innerHTML;
+// ejecutar la plantilla
+let compileData = Handlebars.compile(containerTemplate);
+$.ajax(".../helpers/data/data.json").done(function(cast){
+    $("character-list-container").html(compileData(cast));
+})
+
+</script>

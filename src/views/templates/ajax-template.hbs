@@ -1,0 +1,84 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<div class="container">
+    <div id="quotes">   <!-- etiqueta handlebar -->
+    <!-- plantilla en handlebar -->
+    <script type="text/x-handlebars-template" id="quotes-template">
+        <div class="row">
+            {{#each quotes}}
+            <div class="col-12 col-sm-6 p-3">
+            <div class="card">
+                <h4 class="card-header">
+                    {{title}}
+                </h4>
+                <div class="card-body">
+                    {{{content}}}
+                </div>
+            </div>
+            </div>
+            {{/each}}
+        </div>
+    </script>   <!-- end plantilla en handlebar -->
+    </div>  <!-- etiqueta handlebar -->
+</div>
+
+
+
+<!-- logica de plantilla -->
+{{!-- <script type="text/javascript">
+
+function ajax_get(url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log('responseText:' + xmlhttp.responseText);
+            try {
+                var data = JSON.parse(xmlhttp.responseText);
+            } catch(err) {
+                console.log(err.message + " in " + xmlhttp.responseText);
+                return;
+            }
+            callback(data);
+        }
+    };
+ 
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+ajax_get('.../helpers/data/data.json', function(data) {
+    document.getElementById("title").innerHTML = data["title"];
+ 
+    var html = "<h2>" + data["title"] + "</h2>";
+    html += "<h3>" + data["description"] + "</h3>";
+    html += "<ul>";
+       for (var i=0; i < data["articles"].length; i++) {
+           html += '<li><a href="' + data["articles"][i]["url"] + '">' + data["articles"][i]["title"] + "</a></li>";
+       }
+    html += "</ul>";
+    document.getElementById("text").innerHTML = html;
+});
+
+</script> --}}
+
+
+<script type="text/javascript">
+
+var request = new XMLHttpRequest();
+request.onreadystatechange = function() {
+    if (request.readyState == 4 && request.status == 200){
+        console.log('responseText:' + request.responseText);
+    } else {
+        document.getElementById('result').innerHTML = request.responseText;
+    }
+};
+
+</script>

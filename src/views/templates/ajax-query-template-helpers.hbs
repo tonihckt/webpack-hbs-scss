@@ -1,0 +1,66 @@
+<!-- referencias -->
+{{!-- <link rel="stylesheet" href="./test-template.css"> --}}
+
+
+<!-- Include Handlebars from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.5.3/handlebars.min.js"></script>
+<script src="https://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+
+
+<div class="container">
+    <h1>Game of thrones</h1>
+    <ul id="character-list-container"> <!-- etiqueta handlebar -->
+    <!-- plantilla en handlebar -->
+    <script type="text/x-handlebars-template" id="character-template">
+        {{#each characters}}
+        <li class="character">
+            <img src="images/{{shortCode}}.js">
+            <div class="character-details">
+                <h2>{{name}}</h2>
+                {{formatName name house.seat}}
+                {{formatPhoneNumber house.phone}}
+                <p>Actor: {{actor}}</p>
+                {{#with house}}
+                    {{if name}}<p>House: {{name}}</p>{{/if}}
+                    {{if words}}<p>Words: {{words}}</p>{{/if}}
+                    {{if seat}}<p>Seat: {{seat}}</p>{{/if}}
+                {{/with}}
+                {{if location}}<p>Whereabouts: {{location}}</p>{{/if}}
+                {{unless location}}<p>Whereabouts are unknow</p>{{/unless}}
+            </div><strong></strong>
+        </li>
+        {{/each}}
+    </script>   <!-- end plantilla en handlebar -->
+    </ul>  <!-- etiqueta handlebar -->
+</div>
+
+
+
+<!-- logica de plantilla -->
+
+<script type="text/javascript">
+
+$(document).ready( function(){
+
+Handlebars.registerHelper("formatName", function(property1, property2){
+    // return "Hello my name is" + property + "and live at" + property2;
+    return new Handlebars.SafeString("Hello <strong>" + property + "</strong>" + "<strong>" + property2 + "</strong>");
+})
+
+Handlebars.registerHelper("formatPhoneNumber", function(property){
+    if (property){
+        var phone = property.toString();
+        return "(" + phone.substr(0,3) + ")" + phone.substr(3,3) + "-" + phone.substr(6,4);
+    }
+})
+
+// obtenemos el contenido
+let containerTemplate = $("#character-template").html();
+// ejecutar la plantilla
+let compileData = Handlebars.compile(containerTemplate);
+$.ajax(".../helpers/data/characters.json").done(function(cast){
+    $("character-list-container").html(compileData(cast));
+})
+
+</script>
