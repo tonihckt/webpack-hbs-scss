@@ -103,9 +103,9 @@ module.exports = {
               helperDirs: [path.join(__dirname, './src/views/helpers')],
               partialDirs: [path.join(__dirname, './src/views/partials')],
               helperDirs: [__dirname + "/../handlebars/helpers"],
-              // includePaths: [
-              //   path.resolve("./node_modules/handlebars/dist/handlebars")
-              // ],
+              includePaths: [
+                  path.resolve("./node_modules/handlebars/dist/handlebars")
+              ],
             }
           },         
         ],
